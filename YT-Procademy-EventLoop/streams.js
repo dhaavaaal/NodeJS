@@ -37,7 +37,9 @@ server.on("request", (req, res) => {
   // and then to that particular pipe method we need to pass a writable destination.
   //Writable destination can be a writable stream or duplex stream or transform stream
   const readable = fs.createReadStream("large-file.txt");
+  // console.log(readable);
   readable.pipe(res);
+  console.log(readable.pipe(res));
   //   readableSource.pipe(writableDestination)
 });
 
