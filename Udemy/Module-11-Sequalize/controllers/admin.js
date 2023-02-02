@@ -103,8 +103,9 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  req.user
-    .getProducts()
+  req.user.getProducts();
+  console
+    .log(req)
     // Product.findAll()
     .then((products) => {
       res.render("admin/products", {
