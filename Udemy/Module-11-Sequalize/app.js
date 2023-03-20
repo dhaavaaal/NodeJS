@@ -17,6 +17,8 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const Order = require("./models/order");
+const OrderItem = require("./models/order-item");
 
 // Eg of connecting dB
 // db.execute("SELECT * FROM products")
@@ -26,6 +28,7 @@ const shopRoutes = require("./routes/shop");
 //   })
 //   .catch((err) => console.log(err));
 
+// app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -38,7 +41,7 @@ app.use((req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
-console.log("start");
+// console.log("start");
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
@@ -50,6 +53,9 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 
 sequelize
   .sync()
@@ -68,7 +74,7 @@ sequelize
     return user.createCart();
   })
   .then((cart) => {
-    app.listen(3000);
+    app.listen(3001);
   })
   .catch((err) => console.log(err));
 

@@ -42,12 +42,12 @@ const server = http.createServer((req, res) => {
   if (url === "/message" && method === "POST") {
     const body = [];
     req.on("data", (chunk) => {
-      console.log(chunk);
+      // console.log(chunk);
       body.push(chunk);
     });
     req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
-      console.log(parsedBody);
+      // console.log(parsedBody);
       const message = parsedBody.split("=")[1];
       // fs.writeFileSync("message.txt", message);
       // Event Driven Architecture

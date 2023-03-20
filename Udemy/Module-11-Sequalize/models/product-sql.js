@@ -11,7 +11,7 @@ module.exports = class Product {
   }
 
   save() {
-    console.log("in save");
+    // console.log("in save");
     return db.execute(
       "INSERT INTO products (title, price, description, imageURL) VALUES (?, ?, ?, ?)",
       [this.title, this.price, this.description, this.imageUrl]
